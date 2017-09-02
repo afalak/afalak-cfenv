@@ -8,6 +8,9 @@ applications:
   - afalak-logs
   - afalak-rmq36
   - afalak-redis20
+  - afalak-notify
+  - afalak-nr
+  - afalak-audit
   stack: cflinuxfs2
   env:
     GOVERSION: go1.9

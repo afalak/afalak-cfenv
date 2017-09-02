@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"reflect"
 
 	"github.com/cloudfoundry-community/go-cfenv"
 )
@@ -26,36 +25,32 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	if rmquser, ok := appEnv.Services["rabbitmq-36"][0].Credentials["username"].(string); ok {
 		fmt.Fprintf(w, "rmquser="+rmquser+"\n")
 	}
-	if rmqpassword, ok := appEnv.Services["rabbitmq-36"][0].Credentials["password"].(string); ok {
-		fmt.Fprintf(w, "rmqpassword="+rmqpassword+"\n")
-	}
-	if rmquri, ok := appEnv.Services["rabbitmq-36"][0].Credentials["uri"].(string); ok {
-		fmt.Fprintf(w, "rmquri="+rmquri+"\n\n")
-	}
+	//if rmqpassword, ok := appEnv.Services["rabbitmq-36"][0].Credentials["password"].(string); ok {
+	//	fmt.Fprintf(w, "rmqpassword="+rmqpassword+"\n")
+	//}
+	//if rmquri, ok := appEnv.Services["rabbitmq-36"][0].Credentials["uri"].(string); ok {
+	//	fmt.Fprintf(w, "rmquri="+rmquri+"\n\n")
+	//}
 
 	if redishost, ok := appEnv.Services["redis-20"][0].Credentials["host"].(string); ok {
 		fmt.Fprintf(w, "redishost="+redishost+"\n")
 	}
-	if redispassword, ok := appEnv.Services["redis-20"][0].Credentials["password"].(string); ok {
-		fmt.Fprintf(w, "redispassword="+redispassword+"\n")
+	//if redispassword, ok := appEnv.Services["redis-20"][0].Credentials["password"].(string); ok {
+	//	fmt.Fprintf(w, "redispassword="+redispassword+"\n")
+	//}
+	if redisport, ok := appEnv.Services["redis-20"][0].Credentials["port"].(float64); ok {
+		fmt.Fprintf(w, "redisport=%.0f \n\n", redisport)
 	}
-	if redisport, ok := appEnv.Services["redis-20"][0].Credentials["port"].(int64); ok {
-		fmt.Fprintf(w, "redisport=", redisport, "\n\n")
-	} else {
-		var r = reflect.TypeOf(appEnv.Services["redis-20"][0].Credentials["port"])
-		fmt.Fprintf(w, "redisport=", r, "\n\n")
-	}
-
 	/**
 	for key, value := range appEnv.Services {
-		fmt.Fprintf(w, "<"+key+">", value)
+		fmt.Fprintf(w, "<"+key+">%+v", value)
 		fmt.Fprintf(w, "\n\n")
-	}**/
+	}
+	**/
 }
 
 func main() {
 	http.HandleFunc("/", IndexHandler)
-
 	var port string
 	if port = os.Getenv("PORT"); len(port) == 0 {
 		port = "8080"
