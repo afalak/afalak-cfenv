@@ -1,0 +1,4 @@
+package: go-cfenv
+import:
+- package: github.com/cloudfoundry-community/go-cfenv
+  version: ~1.17.0

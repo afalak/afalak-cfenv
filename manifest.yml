@@ -1,0 +1,15 @@
+applications:
+- name: afalak-cfenv
+  instances: 1
+  memory: 16M
+  disk_quota: 10M
+  buildpack: https://github.com/cloudfoundry/go-buildpack.git
+  services:
+  - afalak-logs
+  - afalak-rmq36
+  - afalak-redis20
+  stack: cflinuxfs2
+  env:
+    GOVERSION: go1.9
+    GOPACKAGENAME: main
+
