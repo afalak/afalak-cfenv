@@ -1,4 +1,4 @@
-# Go CF Environment Package [![Build Status - Master](https://travis-ci.org/cloudfoundry-community/go-cfenv.svg?branch=master)](https://travis-ci.org/cloudfoundry-community/go-cfenv)
+# Go CF Environment Package Sample [![Build Status - Master](https://travis-ci.org/cloudfoundry-community/go-cfenv.svg?branch=master)](https://travis-ci.org/cloudfoundry-community/go-cfenv)
 
 ### Overview
 
@@ -38,3 +38,4 @@ func main() {
 ### Contributing
 
 Pull requests welcomed.
+Check the main.go for sample which runs on Predix
